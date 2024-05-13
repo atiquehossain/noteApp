@@ -7,6 +7,14 @@ android {
     namespace = "com.example.noteapp"
     compileSdk = 34
 
+    buildFeatures {
+
+        dataBinding = true
+
+        // for view binding:
+        // viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.example.noteapp"
         minSdk = 24
@@ -33,6 +41,8 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+
 }
 
 dependencies {
