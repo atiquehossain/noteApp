@@ -20,7 +20,7 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NotViewHolder>() {
         }
     }
 
-    private val differ = AsyncListDiffer(this, differCallback)
+    val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotViewHolder {
         val inflater = LayoutInflater.from(parent.context)
