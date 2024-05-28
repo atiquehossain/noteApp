@@ -20,12 +20,11 @@ import com.example.noteapp.viewmodel.NoteViewModel
 import com.nexgenScript.noteapp.adapter.NoteAdapter
 
 
-class AddNoteFragment : Fragment(R.layout.fragment_add_note) , MenuProvider {
+class AddNoteFragment : Fragment(R.layout.fragment_add_note), MenuProvider {
 
-private var addNoteFragment: FragmentAddNoteBinding? =  null
-    private val binding get() = addNoteFragment !!
+    private var addNoteFragment: FragmentAddNoteBinding? = null
+    private val binding get() = addNoteFragment!!
     private lateinit var notesViewModel: NoteViewModel
-    private lateinit var noteAdapter: NoteAdapter
     private lateinit var addNoteView: View
 
     override fun onCreateView(
@@ -33,46 +32,46 @@ private var addNoteFragment: FragmentAddNoteBinding? =  null
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        addNoteFragment = FragmentAddNoteBinding.inflate(inflater,container,false)
+        addNoteFragment = FragmentAddNoteBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val menuHost :MenuHost = requireActivity()
+        val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
         notesViewModel =
             (activity as MainActivity).noteViewModel
         addNoteView = view
     }
 
-    private fun saveNote(view : View){
+    private fun saveNote(view: View) {
         val noteTitle = binding.addNoteTitle.text.toString().trim()
         val noteDesc = binding.addNoteDesc.text.toString().trim()
 
-        if (noteTitle.isNotEmpty()){
-            val  note = Note(0,noteTitle,noteDesc)
+        if (noteTitle.isNotEmpty()) {
+            val note = Note(0, noteTitle, noteDesc)
             notesViewModel.addNote(note)
-            Toast.makeText(addNoteView.context,"bye",Toast.LENGTH_SHORT).show()
-        }
-        else{
-            Toast.makeText(addNoteView.context,"hi",Toast.LENGTH_LONG).show()
+            Toast.makeText(addNoteView.context, "bye", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(addNoteView.context, "hi", Toast.LENGTH_LONG).show()
 
         }
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
         menu.clear()
-        menuInflater.inflate(R.menu.menu_add_note,menu)
+        menuInflater.inflate(R.menu.menu_add_note, menu)
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        return  when(menuItem.itemId){
-            R.id.saveMenu ->{
+        return when (menuItem.itemId) {
+            R.id.saveMenu -> {
                 saveNote(addNoteView)
                 true
             }
+
             else -> false
         }
     }
