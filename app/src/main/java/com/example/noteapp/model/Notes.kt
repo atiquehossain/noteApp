@@ -2,6 +2,7 @@ package com.example.noteapp.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "notes")
 data class Note(
@@ -10,5 +11,5 @@ data class Note(
     val id: Int,
     val noteTitle: String,
     val noteDesc: String
-)
+): Serializable
 

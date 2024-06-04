@@ -2,10 +2,12 @@ package com.example.noteapp.fragments
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.noteapp.MainActivity
 import com.example.noteapp.R
@@ -55,11 +57,12 @@ class EditNoteFragment : Fragment(R.layout.fragment_edit_note), MenuProvider {
         val title = binding.editNoteTitle.text.toString()
         val description = binding.editNoteDesc.text.toString()
         if (title.isNotEmpty() && description.isNotEmpty()) {
-            val updatedNote = currentNote.copy(noteTitle = title, noteDesc = description)
+            val updatedNote = Note(currentNote.id, noteTitle = title, noteDesc = description)
             noteViewModel.updateNote(updatedNote)
-            // Navigate back or show a success message
+            view?.findNavController()?.popBackStack(R.id.homeFragment,false)
+
         } else {
-            // Show an error message if the title or description is empty
+            Toast.makeText(context,"please enter title",Toast.LENGTH_LONG).show()
         }
     }
 
